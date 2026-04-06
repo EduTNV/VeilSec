@@ -1,0 +1,30 @@
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = ["-v", "--tb=short", "--strict-markers", "--color=yes"]
+markers = [
+    "unit: testes unitários sem I/O",
+    "integration: testes com banco e redis reais",
+    "security: testes de segurança e adversariais",
+]
+
+[tool.coverage.run]
+source = ["apps", "packages"]
+omit = ["*/tests/*", "*/migrations/*", "*/__init__.py"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
